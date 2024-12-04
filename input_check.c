@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:49:34 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/04 14:17:00 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/04 18:02:34 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,19 @@ bool	input_is_digit(char *str)
 	return (true);
 }
 
-int	ft_atoi(char *str)
+int long	ft_atol(char *str)
 {
-	int	i;
-	int	n;
-	int	sign;
+	int			i;
+	int long	n;
+	int			sign;
 
 	i = 0;
 	n = 0;
 	sign = 1;
-	while (str[i])
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		n = n * 10 + str[i] - '0';
 		i++;
@@ -53,7 +56,17 @@ int	ft_atoi(char *str)
 
 bool	input_within_range(int argc, char **argv)
 {
-	
+	if (ft_atol(argv[1]) <= 0 || ft_atol(argv[1]) > MAX_PHILO
+		|| ft_atol(argv[2]) < 0 || ft_atol(argv[2]) > INT_MAX
+		|| ft_atol(argv[3]) < 0 || ft_atol(argv[3]) > INT_MAX
+		|| ft_atol(argv[4]) < 0 || ft_atol(argv[4]) > INT_MAX)
+		return (false);
+	if (argc == 6)
+	{
+		if (ft_atol(argv[5]) < 0 || ft_atol(argv[5]) > INT_MAX)
+			return (false);
+	}
+	return (true);
 }
 
 bool	input_check(int argc, char **argv)
