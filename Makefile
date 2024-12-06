@@ -6,7 +6,7 @@
 #    By: rshaheen <rshaheen@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/12/04 11:49:40 by rshaheen      #+#    #+#                  #
-#    Updated: 2024/12/04 13:50:03 by rshaheen      ########   odam.nl          #
+#    Updated: 2024/12/06 21:37:23 by rshaheen      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ RM = rm -f
 SOURCE =	main.c \
 			print_msg.c \
 			input_check.c \
+			init_data.c \
+			allocate_forks.c \
 			
 
 OBJECTS = $(SOURCE:%.c=$(OBJS_DIR)/%.o)
