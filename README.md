@@ -12,6 +12,6 @@ A deadlock occurs when two or more threads (or processes) are waiting for each o
 **Functions**  
 
 **pthread_mutex_init:** initializes mutex before using it for locking and unlocking.  
-parameters:
+parameters:  
 mutex: A pointer to the mutex object you want to initialize.
 attr: A pointer to a pthread_mutexattr_t structure that defines the attributes for the mutex. to use default attributes, pass NULL(opposed to PTHREAD_MUTEX_RECURSIVE, when we want it to be recursive).
