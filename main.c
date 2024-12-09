@@ -27,5 +27,5 @@ int	main(int argc, char **argv)
 		free(data.fork);
 		return (EXIT_FAILURE);
 	}
-	i = 
+	return 0;
 }

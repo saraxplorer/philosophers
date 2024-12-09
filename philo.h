@@ -23,6 +23,8 @@
 
 # define MAX_PHILO 200
 
+typedef struct s_philo t_philo;
+
 typedef struct s_data
 {
 	int				number_of_philos;
