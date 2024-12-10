@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   make_thread.c                                      :+:    :+:            */
+/*   clean.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/12/06 22:17:24 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 16:43:24 by rshaheen      ########   odam.nl         */
+/*   Created: 2024/12/10 17:07:12 by rshaheen      #+#    #+#                 */
+/*   Updated: 2024/12/10 17:18:58 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	make_thread(t_data *data)//what is the use of table_id??
+void	destroy_mutex(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	pthread_mutex_lock(&data->start_lock);
-	while (i < data->number_of_philos)
+	if (data->fork != NULL)
 	{
-		if (pthread_create(&data->philo[i].table_id, NULL,
-				&routine, &data->philo[i]) != 0)
+		while (i < data->number_of_philos)
 		{
-			pthread_mutex_unlock(&data->start_lock);
-			write(2, "Error making thread\n", 21);
-			return (i);
+			pthread_mutex_destroy(&data->fork[i]);
+			i++;
 		}
-		i++;
 	}
-	data->start_time = get_current_time();
-	pthread_mutex_unlock(&data->start_lock);
-	return (i);
+	pthread_mutex_destroy(&data->deadlock);
+	pthread_mutex_destroy(&data->meal_lock);
+	pthread_mutex_destroy(&data->start_lock);
+}
+
+void	clean(t_data *data)
+{
+	destroy_mutex(data);
+	if (data->fork != NULL)
+		free(data->fork);
+	if (data->philo != NULL)
+		free(data->philo);
 }

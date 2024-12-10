@@ -1,85 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   routine.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/12/10 13:29:13 by rshaheen      #+#    #+#                 */
+/*   Updated: 2024/12/10 16:12:59 by rshaheen      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-//struct timeval is a structure in C used to represent time with microsecond precision. 
-//It is commonly used in system programming for measuring time intervals or getting the current time. 
-//The structure is defined in the <sys/time.h> header file.
-//prototype == int gettimeofday(struct timeval *tv, struct timezone *tz);
-//tv = time in seconds
-//tz = timezone, almoat always NULL
-//tv_sec is the number of seconds since the UNIX epoch (January 1, 1970).
-//Multiplying it by 1000 converts seconds to milliseconds.
-//tv_usec represents the additional microseconds (1 second = 1,000,000 microseconds).
-//Dividing by 1000 converts microseconds to milliseconds.
-int long    get_current_time(void)
+bool	stop_simulation(t_philo *philo)
 {
-    struct timeval  time;
-    int long        time_milisec;
-
-    if (gettimeofday(&time, NULL) != 0)
-    {
-        write(2, "error getting time\n", 20);//can use printf of print error???
-        return (1);//why 0 in dudas??
-    }
-    time_milisec = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-    return (time_milisec);
+	pthread_mutex_lock(&philo->data->deadlock);//what is deadlock?
+	if (philo->data->is_alive == false
+		|| philo->num_of_meals == philo->data->num_of_meals)//???
+	{
+		pthread_mutex_unlock(&philo->data->deadlock);
+		return (true);
+	}
+	pthread_mutex_unlock(&philo->data->deadlock);
+	return (false);
 }
 
-
-
-int long    time_stamp(t_data *data)//why long????
+void	sleep_and_think(t_philo *philo)
 {
-    long int    current_time;
-    long int    new_time;
+	int long	thinking_time;
 
-    current_time = get_current_time();
-    new_time = current_time - data->start_time;
-    return (new_time);
+	thinking_time = 2 * philo->data->time_to_eat - philo->data->time_to_sleep;
+	if (thinking_time < 0)
+		thinking_time = 0;
+	print_msg(philo, SLEEP);
+	simulate_activity_duration(philo->data->time_to_sleep, philo);
+	print_msg(philo, THINK);
+	if (philo->data->number_of_philos % 2 != 0)
+		simulate_activity_duration(thinking_time, philo);
 }
 
-
-void    print_msg(t_philo *philo, int flag)
+void	*routine(void *arg)
 {
-    int long    time;
+	t_philo	*philo;
 
-    pthread_mutex_lock(&philo->data->deadlock);//why??
-    if (philo->data->is_alive == true)//why??
-    {
-        time = time_stamp(philo->data);
-        if (flag == EAT)
-            printf("%ld: %ld is eating\n", time, philo->philo_id);
-        if (flag == SLEEP)
-            printf("%ld: %ld is sleeping\n", time, philo->philo_id);
-        if (flag == THINK)
-            printf("%ld: %ld is thinking\n", time, philo->philo_id);
-        if (flag == PICK_FORK)
-            printf("%ld: %ld has picked up a fork\n", time, philo->philo_id);
-    }
-    pthread_mutex_unlock(&philo->data->deadlock);
-}
-
-void    rest(int long waiting_time, t_philo *philo)
-{
-    int long    wakeup_time;
-
-    wakeup_time = get_current_time() + waiting_time;
-    while (wakeup_time > get_current_time())
-    {
-        usleep(100);
-        
-    }
-}
-
-
-void    *routine(void *arg)
-{
-    t_philo *philo;
-
-    philo = (t_philo *)arg;
-    pthread_mutex_lock(&philo->data->start_lock);
-    pthread_mutex_unlock(&philo->data->start_lock);
-    if ((philo->philo_id % 2) == 0)
-    {
-        print_msg(philo, THINK);
-        rest(philo->data->time_to_eat / 2, philo);
-    }
+	philo = (t_philo *)arg;
+	pthread_mutex_lock(&philo->data->start_lock);
+	pthread_mutex_unlock(&philo->data->start_lock);
+	if ((philo->philo_id % 2) == 0)
+	{
+		print_msg(philo, THINK);
+		simulate_activity_duration(philo->data->time_to_eat / 2, philo);
+	}
+	while (1)
+	{
+		if (eat(philo) == false)
+			return (NULL);
+		if (stop_simulation(philo) == true)
+			return (NULL);
+		sleep_and_think(philo);
+	}
+	return (NULL);
 }

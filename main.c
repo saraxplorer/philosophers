@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/12/04 13:00:02 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/06 22:16:23 by rshaheen      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rshaheen <rshaheen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 13:00:02 by rshaheen          #+#    #+#             */
+/*   Updated: 2024/12/10 17:09:44 by rshaheen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@ int	main(int argc, char **argv)
 		free(data.fork);
 		return (EXIT_FAILURE);
 	}
-	return 0;
+	i = make_thread(&data);
+	supervise(&data);
+	clean(data);
+	return (0);
 }
+

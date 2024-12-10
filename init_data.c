@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/06 18:55:04 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/06 21:27:55 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/10 16:46:52 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //setting the attribute to NULL coz we want default
 
-int	init_mutex(t_data *data)
+int	init_mutex(t_data *data)//what do the locks represent??
 {
 	if (pthread_mutex_init(&data->meal_lock, NULL) != 0)
 	{

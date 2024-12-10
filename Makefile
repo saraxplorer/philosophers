@@ -6,7 +6,7 @@
 #    By: rshaheen <rshaheen@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/12/04 11:49:40 by rshaheen      #+#    #+#                  #
-#    Updated: 2024/12/06 21:37:23 by rshaheen      ########   odam.nl          #
+#    Updated: 2024/12/10 17:17:49 by rshaheen      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,14 @@ SOURCE =	main.c \
 			input_check.c \
 			init_data.c \
 			allocate_forks.c \
+			allocate_philo.c \
+			make_thread.c \
+			routine.c \
+			time_and_duration.c \
+			eat.c \
+			supervise.c \
+			clean.c \
+			
 			
 
 OBJECTS = $(SOURCE:%.c=$(OBJS_DIR)/%.o)
