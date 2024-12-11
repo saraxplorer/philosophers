@@ -47,13 +47,13 @@ void	print_msg(t_philo *philo, int flag)
 	{
 		time = time_stamp(philo->data);
 		if (flag == EAT)
-			printf("%ld: %ld is eating\n", time, philo->philo_id);
+			printf("%ld: %d is eating\n", time, philo->philo_id);
 		if (flag == SLEEP)
-			printf("%ld: %ld is sleeping\n", time, philo->philo_id);	
+			printf("%ld: %d is sleeping\n", time, philo->philo_id);	
 		if (flag == THINK)
-			printf("%ld: %ld is thinking\n", time, philo->philo_id);
+			printf("%ld: %d is thinking\n", time, philo->philo_id);
 		if (flag == PICK_FORK)
-			printf("%ld: %ld has picked up a fork\n", time, philo->philo_id);
+			printf("%ld: %d has picked up a fork\n", time, philo->philo_id);
 	}
 	pthread_mutex_unlock(&philo->data->deadlock);
 }

@@ -78,4 +78,5 @@ void		clean(t_data *data);
 void		error_msg(int error_num);
 void		print_msg(t_philo *philo, int flag);
 
+bool	eat(t_philo *philo);
 #endif
