@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	i = make_thread(&data);
-	//supervise(&data);
+	supervise(&data);
 	wait_for_threads(&data, i);
 	clean(&data);
 	return (0);
