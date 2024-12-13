@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 17:16:34 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:26:58 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,4 @@ void	simulate_activity_duration(int long waiting_time, t_philo *philo)
 		pthread_mutex_unlock(&philo->data->is_alive_lock);
 	}
 }
+

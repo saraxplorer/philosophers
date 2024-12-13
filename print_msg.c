@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:26:24 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:27:55 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	error_msg(int error_num)
 	}
 }
 
-int long	time_stamp(t_data *data)//why long????
+//1. How should the timestamp look like??
+//2. timestamp shows 101 201 301 if data->philo[i].left_fork = &data->fork_locks[i + 1]. but gives 100 200 most times if it is [i - 1]
+
+int long	time_stamp(t_data *data)
 {
 	long int	current_time;
 	long int	new_time;
