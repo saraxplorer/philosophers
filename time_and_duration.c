@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 17:16:34 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 17:17:03 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	simulate_activity_duration(int long waiting_time, t_philo *philo)
 	while (wakeup_time > get_current_time())
 	{
 		usleep(100);
-		pthread_mutex_lock(&philo->data->deadlock);
+		pthread_mutex_lock(&philo->data->is_alive_lock);
 		if (philo->data->is_alive == false)
 		{
-			pthread_mutex_unlock(&philo->data->deadlock);
+			pthread_mutex_unlock(&philo->data->is_alive_lock);
 			return ;
 		}
-		pthread_mutex_unlock(&philo->data->deadlock);
+		pthread_mutex_unlock(&philo->data->is_alive_lock);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 13:29:13 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 16:12:59 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 bool	stop_simulation(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->deadlock);//what is deadlock?
+	pthread_mutex_lock(&philo->data->is_alive_lock);//what is is_alive_lock?
 	if (philo->data->is_alive == false
 		|| philo->num_of_meals == philo->data->num_of_meals)//???
 	{
-		pthread_mutex_unlock(&philo->data->deadlock);
+		pthread_mutex_unlock(&philo->data->is_alive_lock);
 		return (true);
 	}
-	pthread_mutex_unlock(&philo->data->deadlock);
+	pthread_mutex_unlock(&philo->data->is_alive_lock);
 	return (false);
 }
 

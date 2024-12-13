@@ -6,13 +6,19 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/06 18:55:04 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 16:46:52 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:14:39 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//setting the attribute to NULL coz we want default
+//setting the attribute of mutex_init to NULL coz we want default
+//is_alive_lock mutex: Guards 'is_alive" variable
+//Prevents race conditions when checking or updating is_alive
+//meal_lock mutex: Guards the num_of_meals and has_meal.
+//start_lock mutex:Guards the shared variable start_time.
+//Ensures that the initialization and update of the start time of the simulation are done safely without conflicts.
+
 
 int	init_mutex(t_data *data)//what do the locks represent??
 {
@@ -21,16 +27,16 @@ int	init_mutex(t_data *data)//what do the locks represent??
 		write(2, "Error init mutex Meal Counter\n", 31);
 		return (1);
 	}
-	if (pthread_mutex_init(&data->deadlock, NULL) != 0)
+	if (pthread_mutex_init(&data->is_alive_lock, NULL) != 0)
 	{
 		pthread_mutex_destroy(&data->meal_lock);
-		write(2, "Error init mutex deadlock\n", 27);
+		write(2, "Error init mutex is_alive_lock\n", 27);
 		return (1);
 	}
 	if (pthread_mutex_init(&data->start_lock, NULL) != 0)
 	{
 		pthread_mutex_destroy(&data->meal_lock);
-		pthread_mutex_destroy(&data->deadlock);
+		pthread_mutex_destroy(&data->is_alive_lock);
 		write(2, "Error init mutex start_lock\n", 29);
 		return (1);
 	}

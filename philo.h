@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:00:43 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 17:16:13 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef struct s_data
 	int				time_to_sleep;
 	bool			has_meal;
 	int				num_of_meals;
-	pthread_mutex_t	*fork;
 	t_philo			*philo;
-	pthread_mutex_t	deadlock;
+	pthread_mutex_t	is_alive_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	start_lock;
+	pthread_mutex_t	*fork_locks;
 }	t_data;
 
 typedef struct s_philo
@@ -62,7 +62,7 @@ bool		input_checker(int argc, char **argv);
 
 
 t_data		init_data(int argc, char **argv);
-bool		allocate_forks(t_data *data);
+bool		allocate_fork_lock(t_data *data);
 bool		allocate_philo(t_data *data);
 
 int			make_thread(t_data *data);

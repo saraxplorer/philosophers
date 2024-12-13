@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 16:44:28 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 17:18:36 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_dead(t_data *data)
 	int	i;
 
 	i = 0;
-	pthread_mutex_lock(&data->deadlock);
+	pthread_mutex_lock(&data->is_alive_lock);
 	pthread_mutex_lock(&data->meal_lock);
 	while (i < data->number_of_philos)
 	{
@@ -28,13 +28,13 @@ bool	is_dead(t_data *data)
 			printf("%ld %d died\n", get_current_time() - data->start_time,
 				data->philo[i].philo_id);
 			pthread_mutex_unlock(&data->meal_lock);
-			pthread_mutex_unlock(&data->deadlock);
+			pthread_mutex_unlock(&data->is_alive_lock);
 			return (true);
 		}
 		i++;
 	}
 	pthread_mutex_unlock(&data->meal_lock);
-	pthread_mutex_unlock(&data->deadlock);
+	pthread_mutex_unlock(&data->is_alive_lock);
 	return (false);
 }
 

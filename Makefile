@@ -6,7 +6,7 @@
 #    By: rshaheen <rshaheen@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/12/04 11:49:40 by rshaheen      #+#    #+#                  #
-#    Updated: 2024/12/10 17:17:49 by rshaheen      ########   odam.nl          #
+#    Updated: 2024/12/13 19:07:48 by rshaheen      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SOURCE =	main.c \
 			print_msg.c \
 			input_check.c \
 			init_data.c \
-			allocate_forks.c \
+			allocate_fork_lock.c \
 			allocate_philo.c \
 			make_thread.c \
 			routine.c \
