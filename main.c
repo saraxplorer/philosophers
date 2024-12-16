@@ -6,14 +6,11 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:00:02 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 21:32:15 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/16 13:43:46 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//Mutexes prevent data races, not deadlocks.
-//like race for forks
 
 void	wait_for_threads(t_data *data, int index)
 {
@@ -22,7 +19,7 @@ void	wait_for_threads(t_data *data, int index)
 	i = 0;
 	while (i < index)
 	{
-		if (pthread_join(data->philo[i].table_id, NULL) != 0)
+		if (pthread_join(data->philo[i].thread_id, NULL) != 0)
 		{
 			write(2, "Error in waiting for Philo thread to end\n", 42);
 			return ;
@@ -46,7 +43,7 @@ int	main(int argc, char **argv)
 		free(data.fork_locks);
 		return (EXIT_FAILURE);
 	}
-	i = make_thread(&data);
+	i = start_simulation(&data);
 	supervise(&data);
 	wait_for_threads(&data, i);
 	clean(&data);

@@ -6,18 +6,18 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 14:16:43 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/10 15:59:52 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/16 14:43:35 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	is_single_philo(t_philo *philo)//why static in dudas
+static bool	is_single_philo(t_philo *philo)
 {
 	if (philo->data->number_of_philos == 1)
 	{
-		pthread_mutex_lock(&philo->data->meal_lock);//more about meal_lock
-		philo->last_meal = get_current_time();// why it is needed?
+		pthread_mutex_lock(&philo->data->meal_lock);
+		philo->last_meal = get_current_time();
 		pthread_mutex_unlock(&philo->data->meal_lock);
 		pthread_mutex_unlock(philo->right_fork);
 		simulate_activity_duration(philo->data->time_to_die, philo);
@@ -26,7 +26,7 @@ bool	is_single_philo(t_philo *philo)//why static in dudas
 	return (false);
 }
 
-bool	lock_second_and_eat(t_philo *philo, pthread_mutex_t *second_fork)
+static bool	lock_second_and_eat(t_philo *philo, pthread_mutex_t *second_fork)
 {
 	if (pthread_mutex_lock(second_fork) == 0)
 	{
@@ -47,8 +47,8 @@ bool	lock_second_and_eat(t_philo *philo, pthread_mutex_t *second_fork)
 	}
 }
 
-bool	lock_first_fork(t_philo *philo, pthread_mutex_t *first_fork,
-		pthread_mutex_t *second_fork)//why static
+static bool	lock_first_fork(t_philo *philo, pthread_mutex_t *first_fork,
+		pthread_mutex_t *second_fork)
 {
 	if (pthread_mutex_lock(first_fork) == 0)
 	{
@@ -66,12 +66,12 @@ bool	lock_first_fork(t_philo *philo, pthread_mutex_t *first_fork,
 	}
 }
 
-bool	eat(t_philo *philo)//why not static here??
+bool	eat(t_philo *philo)
 {
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 
-	if (philo->philo_id % 2 == 0)// why opposite here?why does it matter?
+	if (philo->philo_id % 2 == 0)
 	{
 		first_fork = philo->left_fork;
 		second_fork = philo->right_fork;

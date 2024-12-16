@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:26:24 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 22:27:55 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/16 15:08:15 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	print_msg(t_philo *philo, int flag)
 {
 	int long	time;
 
-	pthread_mutex_lock(&philo->data->is_alive_lock);//why??
-	if (philo->data->is_alive == true)//why??
+	pthread_mutex_lock(&philo->data->is_alive_lock);
+	if (philo->data->is_alive == true)
 	{
 		time = time_stamp(philo->data);
 		if (flag == EAT)
 			printf("%ld %d is eating\n", time, philo->philo_id);
 		if (flag == SLEEP)
-			printf("%ld %d is sleeping\n", time, philo->philo_id);	
+			printf("%ld %d is sleeping\n", time, philo->philo_id);
 		if (flag == THINK)
 			printf("%ld %d is thinking\n", time, philo->philo_id);
 		if (flag == PICK_FORK)

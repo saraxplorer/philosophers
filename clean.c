@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 17:07:12 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 22:11:53 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/16 12:09:06 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	destroy_mutex(t_data *data)
 	}
 	pthread_mutex_destroy(&data->is_alive_lock);
 	pthread_mutex_destroy(&data->meal_lock);
-	pthread_mutex_destroy(&data->start_lock);
+	pthread_mutex_destroy(&data->start_time_lock);
 }
 
 void	clean(t_data *data)
