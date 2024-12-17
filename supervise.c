@@ -6,11 +6,16 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 16:44:28 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/16 16:48:27 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 13:14:39 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// determines how much time has passed since the philosopher's last meal.
+// by (get_current_time() - data->philo[i].last_meal)
+// If THE TIME SINCE LAST MEAL exceeds time_to_die, updates is_alive to false
+// Prints death message and returns true if a philosopher has died
 
 bool	is_dead(t_data *data)
 {
@@ -64,7 +69,7 @@ void	*supervise(t_data *data)
 {
 	while (1)
 	{
-		if (is_dead(data) == true || had_all_meals(data))
+		if (is_dead(data) == true || had_all_meals(data) == true)
 			return (NULL);
 		usleep(50);
 	}

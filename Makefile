@@ -6,7 +6,7 @@
 #    By: rshaheen <rshaheen@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/12/04 11:49:40 by rshaheen      #+#    #+#                  #
-#    Updated: 2024/12/16 13:43:03 by rshaheen      ########   odam.nl          #
+#    Updated: 2024/12/17 13:46:28 by rshaheen      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread #-flto -Ofast
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 RM = rm -f
 

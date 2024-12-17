@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:00:43 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/16 15:23:27 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 13:48:08 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_philo
 int long	ft_atol(char *str);
 bool		input_checker(int argc, char **argv);
 
-
 t_data		init_data(int argc, char **argv);
 bool		allocate_fork_lock(t_data *data);
 bool		allocate_philo(t_data *data);
@@ -76,7 +75,5 @@ void		clean(t_data *data);
 
 void		error_msg(int error_num);
 void		print_msg(t_philo *philo, int flag);
-
-
 
 #endif
