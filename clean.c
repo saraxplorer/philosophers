@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/10 17:07:12 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/17 13:03:44 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 15:19:58 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ void	destroy_mutex(t_data *data)
 void	clean(t_data *data)
 {
 	destroy_mutex(data);
+
 	if (data->fork_locks != NULL)
+	{
 		free(data->fork_locks);
+		data->fork_locks = NULL;
+	}
 	if (data->philo != NULL)
+	{
 		free(data->philo);
+		data->philo = NULL;
+	}
 }
+

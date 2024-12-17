@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/16 13:41:44 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/17 12:39:19 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 16:22:52 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	to_stop_simulation(t_philo *philo)
 //If time_to_sleep > 2 * time_to_eat, wait_time would become negative. 
 //This is handled by setting wait_time to 0
 //all philo will sleep for time_to_sleep time
-//all philo will wait but only odds will wait extra for wait_time
+//If the number of philosophers is odd, then all philo wait wait_time
 
 void	sleep_and_think(t_philo *philo)
 {
@@ -58,11 +58,6 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->data->start_time_lock);
 	pthread_mutex_unlock(&philo->data->start_time_lock);
-	// if ((philo->philo_id % 2) == 0)
-	// {
-	// 	print_msg(philo, THINK);
-	// 	simulate_activity_duration(philo->data->time_to_eat / 2, philo);
-	// }
 	while (1)
 	{
 		if (eat(philo) == false)

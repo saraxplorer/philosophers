@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:00:43 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/17 13:48:08 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 16:24:39 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 
-# define MAX_PHILO 200
 # define EAT 1
 # define SLEEP 2
 # define THINK 3

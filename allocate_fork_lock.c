@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/06 21:37:10 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/13 21:32:42 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 14:02:50 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 //fork_locks is the COLLECTION of all locks for forks
 //because it allocates for all fork mutexes "NUMBER OF PHILO/FORKS TIME"
 //so it is an array of mutexes
-
 
 bool	allocate_fork_lock(t_data *data)
 {

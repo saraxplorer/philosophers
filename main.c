@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/04 13:00:02 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/17 13:04:07 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/17 15:39:15 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	i = start_simulation(&data);
+	printf("%d\n", i);
 	supervise(&data);
 	wait_for_threads(&data, i);
 	clean(&data);
