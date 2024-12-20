@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/16 13:41:44 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/20 12:14:29 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/20 12:42:50 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ bool	to_stop_simulation(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->is_alive_lock);
 	return (false);
 }
-//THINK == wait
-//If time_to_sleep > 2 * time_to_eat, wait_time would become negative. 
-//This is handled by setting wait_time to 0
+
 //all philo will sleep for time_to_sleep time
+//THINK == wait
+//the wait_time is used only when total philos are odd
+//so 
+//if wait _time gets negative, we turn it into 0
 //If the number of philosophers is odd, then all philo wait wait_time
 //otherwise, odd think time becomes so small that they will steal fork
 //before evens have eaten, in some cases
@@ -36,12 +38,12 @@ void	sleep_and_think(t_philo *philo)
 {
 	int long	wait_time;
 
-	wait_time = 2 * philo->data->time_to_eat - philo->data->time_to_sleep;
-	if (wait_time < 0)
-		wait_time = 0;
 	print_msg(philo, SLEEP);
 	simulate_activity_duration(philo->data->time_to_sleep, philo);
 	print_msg(philo, THINK);
+	wait_time = 2 * philo->data->time_to_eat - philo->data->time_to_sleep;
+	if (wait_time < 0)
+		wait_time = 0;
 	if (philo->data->number_of_philos % 2 != 0)
 		simulate_activity_duration(wait_time, philo);
 }
