@@ -6,7 +6,7 @@
 /*   By: rshaheen <rshaheen@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/12/16 13:41:44 by rshaheen      #+#    #+#                 */
-/*   Updated: 2024/12/17 16:22:52 by rshaheen      ########   odam.nl         */
+/*   Updated: 2024/12/20 12:14:29 by rshaheen      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ bool	to_stop_simulation(t_philo *philo)
 //This is handled by setting wait_time to 0
 //all philo will sleep for time_to_sleep time
 //If the number of philosophers is odd, then all philo wait wait_time
+//otherwise, odd think time becomes so small that they will steal fork
+//before evens have eaten, in some cases
 
 void	sleep_and_think(t_philo *philo)
 {
@@ -43,13 +45,12 @@ void	sleep_and_think(t_philo *philo)
 	if (philo->data->number_of_philos % 2 != 0)
 		simulate_activity_duration(wait_time, philo);
 }
-//If the philosopher has an even ID, he eats for half the time 
-//(philo->data->time_to_eat / 2) and then switch to sleeping/thinking.
-
 //lock and unlock keeps timestamp consistent, 
 //without it garbage valuse keeps coming in timestamp
 
-//test the even id think block, seems to be fine without it
+//at the very beginning, the odds will eat first. so if the philosopher has an
+//even ID, he should wait aka think for like half the eating time.without this
+//block, every even id is non-existant before eating
 
 void	*routine(void *arg)
 {
@@ -58,6 +59,11 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->data->start_time_lock);
 	pthread_mutex_unlock(&philo->data->start_time_lock);
+	if ((philo->philo_id % 2) == 0)
+	{
+		print_msg(philo, THINK);
+		simulate_activity_duration(philo->data->time_to_eat / 2, philo);
+	}
 	while (1)
 	{
 		if (eat(philo) == false)
